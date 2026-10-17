@@ -166,7 +166,7 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
 
     <div class="ai-grid">
       <div class="ai-card"><h2 id="c-value">Markedsværdi</h2><p class="ai-note">Mia. USD. Private: seneste finansieringsrunde.</p>
-        <div class="ai-legend"><span><i style="background:var(--ai-muted)" id="lg-pub"></i>Børsnoteret</span><span><i style="background:var(--ai-c2)" id="lg-priv"></i>Privat / opkøbt</span></div>
+        <div class="ai-legend"><span><i style="background:var(--ai-muted)" id="lg-pub"></i>Børsnoteret</span><span><i style="background:var(--ai-c4)" id="lg-priv"></i>Privat / opkøbt</span></div>
         <div class="ai-chart" id="ch-value" data-source="companies"></div></div>
       <div class="ai-card"><h2 id="c-growth">Omsætningsvækst</h2><p class="ai-note">Seneste rapporterede kvartal, år-over-år.</p>
         <div class="ai-chart" id="ch-growth" data-source="companies"></div></div>
@@ -375,7 +375,7 @@ dash.calc('coLeaders', {
     
     el = document.getElementById('ch-value');
     if (guard(el, 'companies')) hbar(el, c.slice().sort((p, q) => q.value_bn - p.value_bn),
-      {label: r => r.company, value: r => r.value_bn, fmt: f0, color: r => r.type === 'Børsnoteret' ? 'var(--ai-muted)' : 'var(--ai-c2)',
+      {label: r => r.company, value: r => r.value_bn, fmt: f0, color: r => r.type === 'Børsnoteret' ? 'var(--ai-muted)' : 'var(--ai-c4)',
        tip: r => `$${f0(r.value_bn)} mia. · pr. ${r.value_asof}`});
     el = document.getElementById('ch-growth');
     if (guard(el, 'companies')) hbar(el, c.filter(r => r.growth_pct != null).sort((p, q) => q.growth_pct - p.growth_pct),
