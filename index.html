@@ -43,7 +43,7 @@ window.dash=(function(){const calcs={},fns=[];
 .ai-tab[aria-selected="true"]{color:var(--color-fg);border-bottom-color:var(--color-fg)}
 .ai-panel[hidden]{display:none}
 .ai-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-lg)}
-.ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-lg)}
+.ai-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-lg)}
 .ai-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
 .ai-card h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0}
 .ai-note{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:var(--cds-gap-xs) 0 var(--cds-gap-md)}
@@ -72,7 +72,7 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
 .ai [data-dash-source-state="empty"]{color:transparent}
 .ai [data-dash-source-state="refreshing"]{opacity:.5;transition:opacity var(--cds-dur-slow)}
 .ai-about{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);line-height:1.5}
-@media (max-width:40rem){.ai-t .opt{display:none}}
+@media (max-width:40rem){.ai-t .opt{display:none}.ai-grid{grid-template-columns:1fr}}
 </style>
 
 <div class="ai">
@@ -123,7 +123,7 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
     <div class="ai-grid">
       <div class="ai-card"><h2 id="c-intel">Intelligence Index</h2><p class="ai-note">Baseret på data fra Artificial Analysis (via modelgrep) og Arena (arena.ai). Opdateret <span data-source="status" data-field="updated" data-where="key=data">—</span>.</p>
         <div class="ai-chart" id="ch-intel" data-source="models"></div></div>
-      <div class="ai-card"><h2 id="c-arena">Brugernes favoritter: bedste model pr. lab</h2><p class="ai-note">Brugere sammenligner to anonyme svar og stemmer på det bedste. Jo højere score, jo oftere vinder labbets bedste model.</p>
+      <div class="ai-card"><h2 id="c-arena">Brugernes favoritter: bedste model pr. lab</h2><p class="ai-note">Brugere sammenligner to anonyme svar og stemmer på det bedste.</p>
         <div class="ai-chart" id="ch-arena" data-source="arena"></div></div>
       <div class="ai-card"><h2 id="c-speed">Hastighed</h2><p class="ai-note">Output-tokens pr. sekund.</p>
         <div class="ai-chart" id="ch-speed" data-source="models"></div></div>
