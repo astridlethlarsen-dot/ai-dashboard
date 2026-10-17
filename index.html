@@ -24,7 +24,7 @@ window.dash=(function(){const calcs={},fns=[];
  onData(fn){fns.push(fn);fn();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fn,100)})}}})();
 </script></head><body><div class="wrap">
 <style>
-.ai{font-family:var(--font-anthropic-sans);color:var(--color-fg);--ai-c1:#00a2b3;--ai-c2:#cf3e53;--ai-c3:#f3a546;--ai-c4:#bfb202;--ai-muted:#97cfd0}
+.ai{font-family:var(--font-anthropic-sans);color:var(--color-fg);--ai-c1:#4e9f50;--ai-c2:#ef8a0c;--ai-c3:#3ca8bc;--ai-c4:#94a323;--ai-muted:#98d9e4}
 .ai-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:var(--cds-gap-md);margin:var(--cds-gap-md) 0 var(--cds-gap-xs)}
 .ai-hero button{all:unset;box-sizing:border-box;cursor:pointer;background:var(--color-panel);border:1px solid var(--color-border-line);border-left:4px solid var(--ai-c1);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);display:block;min-width:0}
 .ai-hero button.v{border-left-color:var(--ai-c2)}
