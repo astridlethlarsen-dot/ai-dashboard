@@ -24,7 +24,7 @@ window.dash=(function(){const calcs={},fns=[];
  onData(fn){fns.push(fn);fn();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fn,100)})}}})();
 </script></head><body><div class="wrap">
 <style>
-.ai{font-family:var(--font-anthropic-sans);color:var(--color-fg);--ai-c1:#4e9f50;--ai-c2:#ef8a0c;--ai-c3:#3ca8bc;--ai-c4:#94a323;--ai-muted:#98d9e4}
+.ai{font-family:var(--font-anthropic-sans);color:var(--color-fg);--ai-c1:#4e9f50;--ai-c2:#ef8a0c;--ai-c3:#3ca8bc;--ai-c4:#94a323;--ai-muted:#98d9e4;--ai-lteal:#98d9e4;--ai-dteal:#195a53}
 .ai-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:var(--cds-gap-md);margin:var(--cds-gap-md) 0 var(--cds-gap-xs)}
 .ai-hero button{all:unset;box-sizing:border-box;cursor:pointer;background:var(--color-panel);border:1px solid var(--color-border-line);border-left:4px solid var(--ai-c1);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);display:block;min-width:0}
 .ai-hero button.v{border-left-color:var(--ai-c2)}
@@ -166,7 +166,7 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
 
     <div class="ai-grid">
       <div class="ai-card"><h2 id="c-value">Markedsværdi</h2><p class="ai-note">Mia. USD. Private: seneste finansieringsrunde.</p>
-        <div class="ai-legend"><span><i style="background:var(--ai-muted)" id="lg-pub"></i>Børsnoteret</span><span><i style="background:var(--ai-c4)" id="lg-priv"></i>Privat / opkøbt</span></div>
+        <div class="ai-legend"><span><i style="background:var(--ai-muted)" id="lg-pub"></i>Børsnoteret</span><span><i style="background:var(--ai-dteal)" id="lg-priv"></i>Privat / opkøbt</span></div>
         <div class="ai-chart" id="ch-value" data-source="companies"></div></div>
       <div class="ai-card"><h2 id="c-growth">Omsætningsvækst</h2><p class="ai-note">Seneste rapporterede kvartal, år-over-år.</p>
         <div class="ai-chart" id="ch-growth" data-source="companies"></div></div>
@@ -363,7 +363,7 @@ dash.calc('coLeaders', {
       {label: r => r.model, value: r => r.intelligence, fmt: f1, color: () => 'var(--ai-c1)', tip: r => `${r.lab} · Index ${f1(r.intelligence)}`});
     el = document.getElementById('ch-arena');
     if (guard(el, 'arena')) hbar(el, a.slice().sort((p, q) => q.score - p.score),
-      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-c2)', axis: v => f0(v + 1400), tip: r => `${r.model.replace(/\s*\([^)]*\)$/, '')} · ${f0(r.score)} (plads ${r.rank})`});
+      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-lteal)', axis: v => f0(v + 1400), tip: r => `${r.model.replace(/\s*\([^)]*\)$/, '')} · ${f0(r.score)} (plads ${r.rank})`});
     el = document.getElementById('ch-speed');
     if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => q.speed - p.speed).slice(0, 8),
       {label: r => r.model, value: r => r.speed, fmt: f0, color: () => 'var(--ai-c3)', tip: r => `${r.lab} · ${f0(r.speed)} tokens/sek.`});
@@ -375,7 +375,7 @@ dash.calc('coLeaders', {
     
     el = document.getElementById('ch-value');
     if (guard(el, 'companies')) hbar(el, c.slice().sort((p, q) => q.value_bn - p.value_bn),
-      {label: r => r.company, value: r => r.value_bn, fmt: f0, color: r => r.type === 'Børsnoteret' ? 'var(--ai-muted)' : 'var(--ai-c4)',
+      {label: r => r.company, value: r => r.value_bn, fmt: f0, color: r => r.type === 'Børsnoteret' ? 'var(--ai-muted)' : 'var(--ai-dteal)',
        tip: r => `$${f0(r.value_bn)} mia. · pr. ${r.value_asof}`});
     el = document.getElementById('ch-growth');
     if (guard(el, 'companies')) hbar(el, c.filter(r => r.growth_pct != null).sort((p, q) => q.growth_pct - p.growth_pct),
