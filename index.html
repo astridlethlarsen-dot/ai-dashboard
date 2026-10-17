@@ -278,7 +278,7 @@ dash.calc('coLeaders', {
   function hbar(el, rows, o) {
     el.replaceChildren();
     if (!rows.length) return;
-    const W = el.clientWidth || 320, bh = 24, gap = 6, AX = o.axis ? 20 : 0, H = rows.length * (bh + gap) + AX;
+    const W = el.clientWidth || 320, bh = 24, gap = 6, AX = o.axis ? (o.axisTitle ? 40 : 20) : 0, H = rows.length * (bh + gap) + AX;
     const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block').style('overflow', 'visible');
     const probe = svg.append('text').attr('font-size', 12);
     let lw = 0, vw = 0;
@@ -299,6 +299,7 @@ dash.calc('coLeaders', {
       x.ticks(Math.max(2, Math.floor(x.range()[1] / 70))).forEach(t => {
         ax.append('text').attr('x', x(t)).attr('y', 14).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(o.axis(t));
       });
+      if (o.axisTitle) ax.append('text').attr('x', x.range()[1] / 2).attr('y', 34).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(o.axisTitle);
     }
     const tip = document.createElement('div'); tip.className = 'ai-tip'; el.append(tip);
     g.append('rect').attr('width', W).attr('height', bh + gap).attr('fill', 'transparent')
@@ -363,7 +364,7 @@ dash.calc('coLeaders', {
       {label: r => r.model, value: r => r.intelligence, fmt: f1, color: () => 'var(--ai-c1)', tip: r => `${r.lab} · Index ${f1(r.intelligence)}`});
     el = document.getElementById('ch-arena');
     if (guard(el, 'arena')) hbar(el, a.slice().sort((p, q) => q.score - p.score),
-      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-lteal)', axis: v => f0(v + 1400), tip: r => `${r.model.replace(/\s*\([^)]*\)$/, '')} · ${f0(r.score)} (plads ${r.rank})`});
+      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-lteal)', axis: v => f0(v + 1400), axisTitle: 'Arena-score (Elo) · højere = vinder oftere brugernes stemmer', tip: r => `${r.model.replace(/\s*\([^)]*\)$/, '')} · ${f0(r.score)} (plads ${r.rank})`});
     el = document.getElementById('ch-speed');
     if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => q.speed - p.speed).slice(0, 8),
       {label: r => r.model, value: r => r.speed, fmt: f0, color: () => 'var(--ai-c3)', tip: r => `${r.lab} · ${f0(r.speed)} tokens/sek.`});
