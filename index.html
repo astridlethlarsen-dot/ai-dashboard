@@ -48,9 +48,10 @@ window.dash=(function(){const calcs={},fns=[];
 .ai-card h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0}
 .ai-note{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:var(--cds-gap-xs) 0 var(--cds-gap-md)}
 .ai-tile .lbl{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
-.ai-tile .big{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);font-variant-numeric:tabular-nums;margin:var(--cds-gap-xs) 0}
+.ai-tile{display:flex;flex-direction:column}
+.ai-tile .big{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);font-variant-numeric:tabular-nums;margin:auto 0 0;padding-top:var(--cds-gap-md)}
 .ai-tile .unit{font-size:var(--cds-font-size-body);color:var(--color-fg-muted);font-family:var(--font-anthropic-sans)}
-.ai-tile .who{font-size:var(--cds-font-size-body)}
+.ai-tile .who{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin-top:var(--cds-gap-sm)}
 .ai-tile .lab{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
 .ai-chart{position:relative;min-height:12rem}
 .ai-sec{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:var(--cds-gap-lg) 0 var(--cds-gap-sm)}
@@ -102,21 +103,21 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
   <section class="ai-panel" id="modeller">
     <div class="ai-tiles">
       <div class="ai-card ai-tile"><div class="lbl">Højeste Intelligence Index</div>
-        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=intelligence">—</span></div>
         <div class="who" data-source="leaders" data-field="model" data-where="metric=intelligence">—</div>
-        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=intelligence">—</div></div>
+        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=intelligence">—</div>
+        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=intelligence">—</span></div></div>
       <div class="ai-card ai-tile"><div class="lbl">Brugernes favorit (stemmer på Arena)</div>
-        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=arena">—</span></div>
         <div class="who" data-source="leaders" data-field="model" data-where="metric=arena">—</div>
-        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=arena">—</div></div>
+        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=arena">—</div>
+        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=arena">—</span></div></div>
       <div class="ai-card ai-tile"><div class="lbl">Hurtigste model</div>
-        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=speed">—</span> <span class="unit">tokens/sek.</span></div>
         <div class="who" data-source="leaders" data-field="model" data-where="metric=speed">—</div>
-        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=speed">—</div></div>
+        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=speed">—</div>
+        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=speed">—</span> <span class="unit">tokens/sek.</span></div></div>
       <div class="ai-card ai-tile"><div class="lbl">Billigste model (input)</div>
-        <div class="big"><span class="unit">$</span><span data-source="leaders" data-field="value" data-where="metric=price">—</span> <span class="unit">pr. 1M tokens</span></div>
         <div class="who" data-source="leaders" data-field="model" data-where="metric=price">—</div>
-        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=price">—</div></div>
+        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=price">—</div>
+        <div class="big"><span class="unit">$</span><span data-source="leaders" data-field="value" data-where="metric=price">—</span> <span class="unit">pr. 1M tokens</span></div></div>
     </div>
 
     <div class="ai-grid">
@@ -150,17 +151,17 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
   <section class="ai-panel" id="virksomheder" hidden>
     <div class="ai-tiles">
       <div class="ai-card ai-tile"><div class="lbl">Mest værdifulde</div>
-        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=value">—</span> <span class="unit">mia.</span></div>
-        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=value">—</div></div>
+        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=value">—</div>
+        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=value">—</span> <span class="unit">mia.</span></div></div>
       <div class="ai-card ai-tile"><div class="lbl">Højeste omsætningsvækst</div>
-        <div class="big"><span data-source="coLeaders" data-field="value" data-where="metric=growth">—</span><span class="unit">%</span></div>
-        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=growth">—</div></div>
+        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=growth">—</div>
+        <div class="big"><span data-source="coLeaders" data-field="value" data-where="metric=growth">—</span><span class="unit">%</span></div></div>
       <div class="ai-card ai-tile"><div class="lbl">Mest værdifulde private AI-lab</div>
-        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=private">—</span> <span class="unit">mia.</span></div>
-        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=private">—</div></div>
+        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=private">—</div>
+        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=private">—</span> <span class="unit">mia.</span></div></div>
       <div class="ai-card ai-tile"><div class="lbl">Højeste run-rate (privat lab)</div>
-        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=runrate">—</span> <span class="unit">mia./år</span></div>
-        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=runrate">—</div></div>
+        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=runrate">—</div>
+        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=runrate">—</span> <span class="unit">mia./år</span></div></div>
     </div>
 
     <div class="ai-grid">
