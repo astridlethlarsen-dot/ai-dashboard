@@ -210,7 +210,7 @@ dash.calc('leaders', {
     const p = best(models, 'price_in', -1), a = best(arena, 'score', 1);
     return [
       {metric: 'intelligence', model: i.model, lab: i.lab, value: i.intelligence},
-      {metric: 'arena', model: a.model, lab: a.lab, value: a.score},
+      {metric: 'arena', model: a.model.replace(/\s*\([^)]*\)$/, ''), lab: a.lab, value: a.score},
       {metric: 'speed', model: s.model, lab: s.lab, value: s.speed},
       {metric: 'price', model: p.model, lab: p.lab, value: p.price_in}
     ];
@@ -363,7 +363,7 @@ dash.calc('coLeaders', {
       {label: r => r.model, value: r => r.intelligence, fmt: f1, color: () => 'var(--ai-c1)', tip: r => `${r.lab} · Index ${f1(r.intelligence)}`});
     el = document.getElementById('ch-arena');
     if (guard(el, 'arena')) hbar(el, a.slice().sort((p, q) => q.score - p.score),
-      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-c2)', axis: v => f0(v + 1400), tip: r => `${r.model} · ${f0(r.score)} (plads ${r.rank})`});
+      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-c2)', axis: v => f0(v + 1400), tip: r => `${r.model.replace(/\s*\([^)]*\)$/, '')} · ${f0(r.score)} (plads ${r.rank})`});
     el = document.getElementById('ch-speed');
     if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => q.speed - p.speed).slice(0, 8),
       {label: r => r.model, value: r => r.speed, fmt: f0, color: () => 'var(--ai-c3)', tip: r => `${r.lab} · ${f0(r.speed)} tokens/sek.`});
