@@ -1,0 +1,367 @@
+<!doctype html><html lang="da"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+:root{--font-anthropic-sans:Inter,system-ui,sans-serif;--font-anthropic-serif:"Source Serif 4",Georgia,serif;
+--color-fg:#1f1e1d;--color-fg-muted:#6b6a68;--color-bg:#faf9f5;--color-panel:#ffffff;--color-border-line:#e6e3da;--color-bad:#c4453c;
+--cds-text-secondary:#6b6a68;--cds-surface-popover:#ffffff;--cds-border:#e6e3da;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.08);
+--cds-chart-muted:#c9c6bd;--cds-radius:10px;--cds-pad-xs:4px;--cds-pad-sm:8px;--cds-pad-md:12px;--cds-pad-lg:20px;
+--cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:16px;--cds-gap-lg:28px;--cds-font-size-caption:12px;--cds-font-size-body:14px;
+--cds-font-size-heading:16px;--cds-font-size-title:32px;--cds-font-weight-medium:500;--cds-dur-slow:.3s;
+--c0:#c96442;--c1:#3b7dd8;--c2:#2e9e6b;--c3:#8a5cc7}
+@media (prefers-color-scheme:dark){:root{--color-fg:#ece9e1;--color-fg-muted:#a3a19b;--color-bg:#1f1e1d;--color-panel:#2a2927;--color-border-line:#3a3936;
+--cds-text-secondary:#a3a19b;--cds-surface-popover:#2a2927;--cds-border:#3a3936;--cds-chart-muted:#55534f;--c0:#e07a55;--c1:#6aa1ee;--c2:#4fbf8b;--c3:#a885dc}}
+body{margin:0;background:var(--color-bg)}
+.wrap{max-width:1200px;margin-inline:auto;padding:clamp(16px,4vw,40px)}
+</style>
+<script>
+window.DATA={"models": [{"model": "Claude Opus 5.5", "lab": "Anthropic", "intelligence": 57.6, "speed": 178, "price_in": 4.0}, {"model": "Claude Sonnet 5.5", "lab": "Anthropic", "intelligence": 56.0, "speed": 117, "price_in": 2.0}, {"model": "Claude Fable 5.1", "lab": "Anthropic", "intelligence": 53.4, "speed": 63, "price_in": 10.0}, {"model": "GPT-6 Astra", "lab": "OpenAI", "intelligence": 52.7, "speed": 185, "price_in": 10.0}, {"model": "Gemini 4 Argon", "lab": "Google", "intelligence": 52.6, "speed": 62, "price_in": 2.0}, {"model": "Muse Wonder", "lab": "Meta", "intelligence": 52.4, "speed": 80, "price_in": 4.0}, {"model": "GPT-6.1 Sol", "lab": "OpenAI", "intelligence": 51.8, "speed": 64, "price_in": 2.0}, {"model": "Muse Spark 1.3", "lab": "Meta", "intelligence": 48.1, "speed": 91, "price_in": 1.25}, {"model": "GPT-5.6 Sol", "lab": "OpenAI", "intelligence": 47.0, "speed": 122, "price_in": 4.0}, {"model": "Grok 4.7", "lab": "xAI (SpaceX)", "intelligence": 46.4, "speed": 69, "price_in": 2.0}, {"model": "MiMo-V2.6-Pro", "lab": "Xiaomi", "intelligence": 46.3, "speed": 32, "price_in": 0.435}, {"model": "Qwen3.8-Max", "lab": "Alibaba", "intelligence": 45.4, "speed": 38, "price_in": 2.0}, {"model": "GLM-5.3", "lab": "Z.ai", "intelligence": 44.8, "speed": 187, "price_in": 0.079}, {"model": "Kimi K3", "lab": "Moonshot", "intelligence": 43.6, "speed": 107, "price_in": 0.304}, {"model": "Claude Haiku 5.5", "lab": "Anthropic", "intelligence": 43.4, "speed": 168, "price_in": 0.1}, {"model": "Gemini 3.8 Flash", "lab": "Google", "intelligence": 40.9, "speed": 109, "price_in": 0.825}, {"model": "DeepSeek V4.1 Flash", "lab": "DeepSeek", "intelligence": 39.5, "speed": 276, "price_in": 0.15}, {"model": "GPT-6 Luna", "lab": "OpenAI", "intelligence": 38.1, "speed": 110, "price_in": 0.1}], "arena": [{"lab": "Google", "model": "Gemini 4 Argon (High)", "rank": 1, "score": 1524, "votes": 4904}, {"lab": "Meta", "model": "Muse Wonder (Max)", "rank": 2, "score": 1509, "votes": 3247}, {"lab": "Anthropic", "model": "Claude Opus 5.5 (High)", "rank": 3, "score": 1508, "votes": 8300}, {"lab": "Moonshot", "model": "Kimi K3 (Max)", "rank": 18, "score": 1487, "votes": 32795}, {"lab": "OpenAI", "model": "GPT-5.6 Sol (xHigh)", "rank": 21, "score": 1485, "votes": 40442}, {"lab": "Alibaba", "model": "Qwen3.8-Max", "rank": 24, "score": 1482, "votes": 27766}, {"lab": "Xiaomi", "model": "MiMo-V2.6-Pro", "rank": 27, "score": 1479, "votes": 4075}, {"lab": "Z.ai", "model": "GLM-5.3 (Max)", "rank": 28, "score": 1479, "votes": 22543}, {"lab": "xAI (SpaceX)", "model": "Grok 4.20 Beta 1", "rank": 37, "score": 1475, "votes": 27908}, {"lab": "DeepSeek", "model": "DeepSeek-V4.1-Flash (Max)", "rank": 38, "score": 1475, "votes": 12793}], "companies": [{"company": "Nvidia", "type": "Børsnoteret", "value_bn": 5650, "value_asof": "2026-10-05", "growth_pct": 106, "growth_period": "Q2 FY27 (maj–jul 2026)", "run_rate_bn": null}, {"company": "Alphabet", "type": "Børsnoteret", "value_bn": 4160, "value_asof": "2026-10-05", "growth_pct": 24, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Microsoft", "type": "Børsnoteret", "value_bn": 3840, "value_asof": "2026-10-05", "growth_pct": 18, "growth_period": "Q1 2026 (jan–mar)", "run_rate_bn": null}, {"company": "Amazon", "type": "Børsnoteret", "value_bn": 2710, "value_asof": "2026-10-05", "growth_pct": 19.6, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Meta", "type": "Børsnoteret", "value_bn": 1900, "value_asof": "2026-10-05", "growth_pct": 28, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Anthropic", "type": "Privat", "value_bn": 965, "value_asof": "2026-05-28", "growth_pct": null, "growth_period": null, "run_rate_bn": 65}, {"company": "OpenAI", "type": "Privat", "value_bn": 852, "value_asof": "2026-03-31", "growth_pct": null, "growth_period": null, "run_rate_bn": 50}, {"company": "xAI (SpaceX)", "type": "Del af SpaceX", "value_bn": 250, "value_asof": "2026-02-02", "growth_pct": null, "growth_period": null, "run_rate_bn": null}], "share": [{"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Anthropic", "share_pct": 31.4}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "OpenAI", "share_pct": 29.0}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Google", "share_pct": 12.1}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Microsoft", "share_pct": 7.2}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "Anthropic", "share_pct": 40}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "OpenAI", "share_pct": 27}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "Google", "share_pct": 21}, {"measure": "Andel af virksomheder der betaler (Ramp AI Index, aug 2026)", "company": "Anthropic", "share_pct": 43.8}, {"measure": "Andel af virksomheder der betaler (Ramp AI Index, aug 2026)", "company": "OpenAI", "share_pct": 39.8}]};
+window.dash=(function(){const calcs={},fns=[];
+ return{colors:['var(--c0)','var(--c1)','var(--c2)','var(--c3)'],
+ data(id){if(calcs[id]){const c=calcs[id];return{status:'ok',data:c.fn(...c.inputs.map(i=>this.data(i).data))}}return{status:DATA[id]?'ok':'missing',data:DATA[id]||[]}},
+ calc(id,o){calcs[id]=o},setLink(n){history.replaceState(null,'','#'+n)},
+ onData(fn){fns.push(fn);fn();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fn,100)})}}})();
+</script></head><body><div class="wrap">
+<style>
+.ai{font-family:var(--font-anthropic-sans);color:var(--color-fg)}
+.ai-head h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0}
+.ai-sub{color:var(--color-fg-muted);margin:var(--cds-gap-xs) 0 var(--cds-gap-lg);font-size:var(--cds-font-size-body)}
+.ai-sub b{font-weight:var(--cds-font-weight-medium);color:var(--color-fg)}
+.ai-tabs{display:flex;gap:var(--cds-gap-sm);border-bottom:1px solid var(--color-border-line);margin-bottom:var(--cds-gap-lg)}
+.ai-tab{background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;padding:var(--cds-pad-sm) var(--cds-pad-md);font:inherit;color:var(--color-fg-muted);cursor:pointer}
+.ai-tab[aria-selected="true"]{color:var(--color-fg);border-bottom-color:var(--color-fg)}
+.ai-panel[hidden]{display:none}
+.ai-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,12rem),1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-lg)}
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));gap:var(--cds-gap-md);margin-bottom:var(--cds-gap-lg)}
+.ai-card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);min-width:0}
+.ai-card h2{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0}
+.ai-note{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:var(--cds-gap-xs) 0 var(--cds-gap-md)}
+.ai-tile .lbl{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.ai-tile .big{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);font-variant-numeric:tabular-nums;margin:var(--cds-gap-xs) 0}
+.ai-tile .unit{font-size:var(--cds-font-size-body);color:var(--color-fg-muted);font-family:var(--font-anthropic-sans)}
+.ai-tile .who{font-size:var(--cds-font-size-body)}
+.ai-tile .lab{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.ai-chart{position:relative;min-height:12rem}
+.ai-sec{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:var(--cds-gap-lg) 0 var(--cds-gap-sm)}
+.ai-subh{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin:var(--cds-gap-md) 0 var(--cds-gap-xs)}
+.ai-tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);border-radius:var(--cds-radius);box-shadow:var(--cds-shadow-popover);padding:var(--cds-pad-xs) var(--cds-pad-sm);font-size:var(--cds-font-size-caption);opacity:0;white-space:nowrap;z-index:2}
+.ai-tip .k{color:var(--cds-text-secondary)}
+.ai-legend{display:flex;gap:var(--cds-gap-md);font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-bottom:var(--cds-gap-sm)}
+.ai-legend i{display:inline-block;width:.6rem;height:.6rem;border-radius:2px;margin-right:var(--cds-gap-xs);vertical-align:middle}
+.ai-search{font:inherit;padding:var(--cds-pad-xs) var(--cds-pad-sm);border:1px solid var(--color-border-line);border-radius:var(--cds-radius);background:var(--color-bg);color:var(--color-fg);margin-bottom:var(--cds-gap-sm);width:min(100%,16rem)}
+.ai-scroll{max-height:28rem;overflow:auto}
+table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-body);font-variant-numeric:tabular-nums}
+.ai-t th,.ai-t td{text-align:left;padding:var(--cds-pad-xs) var(--cds-pad-sm);border-bottom:1px solid var(--color-border-line);white-space:nowrap}
+.ai-t th{position:sticky;top:0;background:var(--color-panel);font-weight:var(--cds-font-weight-medium)}
+.ai-t th button{all:unset;cursor:pointer}
+.ai-t .n{text-align:right}
+.ai-fail{display:flex;align-items:center;justify-content:center;gap:var(--cds-gap-xs);min-height:12rem;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+.ai-fail::before{content:"";width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad)}
+.ai [data-dash-source-state="empty"]{color:transparent}
+.ai [data-dash-source-state="refreshing"]{opacity:.5;transition:opacity var(--cds-dur-slow)}
+.ai-about{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);line-height:1.5}
+@media (max-width:40rem){.ai-t .opt{display:none}}
+</style>
+
+<div class="ai">
+  <header class="ai-head">
+    <h1 id="top">AI dashboard</h1>
+    <p class="ai-sub">Mest intelligente model lige nu: <b data-source="leaders" data-field="model" data-where="metric=intelligence">—</b>. Mest værdifulde virksomhed: <b data-source="coLeaders" data-field="company" data-where="metric=value">—</b>. Opdateres hver 14. dag.</p>
+  </header>
+
+  <nav class="ai-tabs" role="tablist">
+    <button class="ai-tab" role="tab" data-tab="modeller" aria-selected="true">Modeller</button>
+    <button class="ai-tab" role="tab" data-tab="virksomheder" aria-selected="false">Virksomheder</button>
+  </nav>
+
+  <section class="ai-panel" id="modeller">
+    <div class="ai-tiles">
+      <div class="ai-card ai-tile"><div class="lbl">Højeste Intelligence Index</div>
+        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=intelligence">—</span></div>
+        <div class="who" data-source="leaders" data-field="model" data-where="metric=intelligence">—</div>
+        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=intelligence">—</div></div>
+      <div class="ai-card ai-tile"><div class="lbl">Højeste Arena-score (menneskers stemmer)</div>
+        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=arena">—</span></div>
+        <div class="who" data-source="leaders" data-field="model" data-where="metric=arena">—</div>
+        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=arena">—</div></div>
+      <div class="ai-card ai-tile"><div class="lbl">Hurtigste model</div>
+        <div class="big"><span data-source="leaders" data-field="value" data-where="metric=speed">—</span> <span class="unit">tokens/sek.</span></div>
+        <div class="who" data-source="leaders" data-field="model" data-where="metric=speed">—</div>
+        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=speed">—</div></div>
+      <div class="ai-card ai-tile"><div class="lbl">Billigste model (input)</div>
+        <div class="big"><span class="unit">$</span><span data-source="leaders" data-field="value" data-where="metric=price">—</span> <span class="unit">pr. 1M tokens</span></div>
+        <div class="who" data-source="leaders" data-field="model" data-where="metric=price">—</div>
+        <div class="lab" data-source="leaders" data-field="lab" data-where="metric=price">—</div></div>
+    </div>
+
+    <div class="ai-grid">
+      <div class="ai-card"><h2 id="c-intel">Intelligence Index</h2><p class="ai-note">Samlet score på 10 uafhængige tests. Højere er bedre. Top 8.</p>
+        <div class="ai-chart" id="ch-intel" data-source="models"></div></div>
+      <div class="ai-card"><h2 id="c-arena">Arena-score, bedste model pr. lab</h2><p class="ai-note">Blinde stemmer fra brugere (Elo). Højere er bedre. Søjlerne starter ved 1.400.</p>
+        <div class="ai-chart" id="ch-arena" data-source="arena"></div></div>
+      <div class="ai-card"><h2 id="c-speed">Hastighed</h2><p class="ai-note">Output-tokens pr. sekund. Højere er bedre. Top 8.</p>
+        <div class="ai-chart" id="ch-speed" data-source="models"></div></div>
+      <div class="ai-card"><h2 id="c-price">Pris</h2><p class="ai-note">USD pr. 1M input-tokens. Lavere er bedre. Billigste 8.</p>
+        <div class="ai-chart" id="ch-price" data-source="models"></div></div>
+    </div>
+
+    <div class="ai-card">
+      <h2 id="t-models">Sammenlign modeller</h2><p class="ai-note">Klik på en kolonne for at sortere.</p>
+      <input class="ai-search" id="q-models" type="search" placeholder="Søg model eller lab…">
+      <div class="ai-scroll">
+        <table class="ai-t" id="tbl-models" data-source="models" data-row-key="model">
+          <thead><tr>
+            <th data-field="model"><button>Model</button></th>
+            <th data-field="lab"><button>Lab</button></th>
+            <th class="n" data-field="intelligence"><button>Intelligence</button></th>
+            <th class="n" data-field="speed"><button>Tokens/sek.</button></th>
+            <th class="n opt" data-field="price_in"><button>$ / 1M input</button></th>
+          </tr></thead><tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="ai-panel" id="virksomheder" hidden>
+    <div class="ai-tiles">
+      <div class="ai-card ai-tile"><div class="lbl">Mest værdifulde</div>
+        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=value">—</span> <span class="unit">mia.</span></div>
+        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=value">—</div></div>
+      <div class="ai-card ai-tile"><div class="lbl">Højeste omsætningsvækst</div>
+        <div class="big"><span data-source="coLeaders" data-field="value" data-where="metric=growth">—</span><span class="unit">%</span></div>
+        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=growth">—</div></div>
+      <div class="ai-card ai-tile"><div class="lbl">Mest værdifulde private AI-lab</div>
+        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=private">—</span> <span class="unit">mia.</span></div>
+        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=private">—</div></div>
+      <div class="ai-card ai-tile"><div class="lbl">Højeste run-rate (privat lab)</div>
+        <div class="big"><span class="unit">$</span><span data-source="coLeaders" data-field="value" data-where="metric=runrate">—</span> <span class="unit">mia./år</span></div>
+        <div class="who" data-source="coLeaders" data-field="company" data-where="metric=runrate">—</div></div>
+    </div>
+
+    <div class="ai-grid">
+      <div class="ai-card"><h2 id="c-value">Markedsværdi</h2><p class="ai-note">Mia. USD. Private: seneste finansieringsrunde.</p>
+        <div class="ai-legend"><span><i style="background:var(--cds-chart-muted)" id="lg-pub"></i>Børsnoteret</span><span><i id="lg-priv"></i>Privat / opkøbt</span></div>
+        <div class="ai-chart" id="ch-value" data-source="companies"></div></div>
+      <div class="ai-card"><h2 id="c-growth">Omsætningsvækst</h2><p class="ai-note">Seneste rapporterede kvartal, år-over-år.</p>
+        <div class="ai-chart" id="ch-growth" data-source="companies"></div></div>
+    </div>
+
+    <div class="ai-card" style="margin-bottom:var(--cds-gap-lg)">
+      <h2 id="c-share">Markedsandele</h2>
+      <p class="ai-note">Tre målinger, tre forskellige vindere. Ramp tæller virksomheder, der betaler hver leverandør, så andelene summer til mere end 100. Menlo Ventures er investor i Anthropic.</p>
+      <div class="ai-chart" id="ch-share" data-source="share"></div>
+    </div>
+
+    <div class="ai-card">
+      <h2 id="t-co">Virksomheder i tal</h2><p class="ai-note">Run-rate = seneste måneds omsætning × 12. Anthropic og OpenAI regner den forskelligt, så tallene er ikke helt sammenlignelige.</p>
+      <div class="ai-scroll">
+        <table class="ai-t" id="tbl-co" data-source="companies" data-row-key="company">
+          <thead><tr>
+            <th data-field="company"><button>Virksomhed</button></th>
+            <th class="opt" data-field="type"><button>Type</button></th>
+            <th class="n" data-field="value_bn"><button>Værdi ($ mia.)</button></th>
+            <th class="opt" data-field="value_asof"><button>Værdi pr.</button></th>
+            <th class="n" data-field="growth_pct"><button>Vækst %</button></th>
+            <th class="opt" data-field="growth_period"><button>Periode</button></th>
+            <th class="n" data-field="run_rate_bn"><button>Run-rate ($ mia.)</button></th>
+          </tr></thead><tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <p class="ai-about" id="om">Modeldata: Artificial Analysis (via modelgrep) og Arena (arena.ai). Virksomhedsdata: kvartalsregnskaber, rapporterede finansieringsrunder, Counterpoint, Menlo Ventures og Ramp. Data opdateret 17. oktober 2026. Jeg (Claude) er lavet af Anthropic, så tallene kommer kun fra eksterne kilder.</p>
+</div>
+
+<script>
+dash.calc('leaders', {
+  inputs: ['models', 'arena'],
+  title: 'Førende modeller',
+  description: 'Højeste Intelligence Index, hastighed og Arena-score samt laveste inputpris.',
+  fn: (models, arena) => {
+    const best = (rows, k, dir) => rows.slice().sort((a, b) => dir * (b[k] - a[k]))[0];
+    const i = best(models, 'intelligence', 1), s = best(models, 'speed', 1);
+    const p = best(models, 'price_in', -1), a = best(arena, 'score', 1);
+    return [
+      {metric: 'intelligence', model: i.model, lab: i.lab, value: i.intelligence},
+      {metric: 'arena', model: a.model, lab: a.lab, value: a.score},
+      {metric: 'speed', model: s.model, lab: s.lab, value: s.speed},
+      {metric: 'price', model: p.model, lab: p.lab, value: p.price_in}
+    ];
+  }
+});
+
+dash.calc('coLeaders', {
+  inputs: ['companies'],
+  title: 'Førende virksomheder',
+  description: 'Højeste markedsværdi, vækst, private værdiansættelse og run-rate.',
+  fn: (companies) => {
+    const best = (rows, k) => rows.filter(r => r[k] != null).sort((a, b) => b[k] - a[k])[0];
+    const v = best(companies, 'value_bn'), g = best(companies, 'growth_pct');
+    const p = best(companies.filter(r => r.type === 'Privat'), 'value_bn');
+    const r = best(companies, 'run_rate_bn');
+    return [
+      {metric: 'value', company: v.company, value: v.value_bn},
+      {metric: 'growth', company: g.company, value: g.growth_pct},
+      {metric: 'private', company: p.company, value: p.value_bn},
+      {metric: 'runrate', company: r.company, value: r.run_rate_bn}
+    ];
+  }
+});
+
+(function () {
+  const root = document.querySelector('.ai');
+  const num = v => v == null ? '' : (Number.isInteger(v) ? d3.format(',')(v) : String(v));
+
+  // Tabs
+  const tabs = root.querySelectorAll('.ai-tab');
+  const show = id => {
+    tabs.forEach(t => t.setAttribute('aria-selected', String(t.dataset.tab === id)));
+    root.querySelectorAll('.ai-panel').forEach(p => { p.hidden = p.id !== id; });
+    dash.setLink(id);
+    window.dispatchEvent(new Event('resize'));
+  };
+  tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
+  if (location.hash.slice(1) === 'virksomheder') show('virksomheder');
+
+  // Fill single-value marks
+  function fillMarks() {
+    root.querySelectorAll('[data-where]').forEach(el => {
+      const d = dash.data(el.dataset.source);
+      if (d.status !== 'ok') return;
+      const [k, v] = el.dataset.where.split('=');
+      const row = (d.data || []).find(r => String(r[k]) === decodeURIComponent(v));
+      el.textContent = row ? num(row[el.dataset.field]) : '—';
+    });
+  }
+
+  function guard(el, id) {
+    const st = dash.data(id).status;
+    if (st === 'ok') { el.classList.remove('dash-skeleton'); return true; }
+    el.replaceChildren();
+    if (st === 'error' || st === 'connect' || st === 'declined') {
+      el.classList.remove('dash-skeleton');
+      const f = document.createElement('div'); f.className = 'ai-fail'; f.textContent = 'Failed to load'; el.append(f);
+    } else el.classList.add('dash-skeleton');
+    return false;
+  }
+
+  function hbar(el, rows, o) {
+    el.replaceChildren();
+    if (!rows.length) return;
+    const W = el.clientWidth || 320, bh = 24, gap = 6, H = rows.length * (bh + gap);
+    const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block').style('overflow', 'visible');
+    const probe = svg.append('text').attr('font-size', 12);
+    let lw = 0, vw = 0;
+    rows.forEach(r => { probe.text(o.label(r)); lw = Math.max(lw, probe.node().getComputedTextLength());
+                        probe.text(o.fmt(o.value(r))); vw = Math.max(vw, probe.node().getComputedTextLength()); });
+    probe.remove();
+    lw = Math.min(lw, W * 0.45);
+    const x = d3.scaleLinear([0, d3.max(rows, o.value) || 1], [0, Math.max(12, W - lw - vw - 28)]);
+    const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (d, i) => `translate(0,${i * (bh + gap)})`);
+    g.append('text').attr('x', lw).attr('y', bh / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('font-size', 12).attr('fill', 'var(--color-fg)').text(o.label);
+    const bars = g.append('rect').attr('x', lw + 8).attr('y', 4).attr('height', bh - 8).attr('rx', 4)
+      .attr('width', d => Math.max(2, x(o.value(d)))).attr('fill', d => o.color ? o.color(d) : dash.colors[0]);
+    g.append('text').attr('x', d => lw + 14 + x(o.value(d))).attr('y', bh / 2).attr('dy', '0.35em').attr('font-size', 12)
+      .attr('fill', 'var(--color-fg-muted)').style('font-variant-numeric', 'tabular-nums').text(d => o.fmt(o.value(d)));
+    const tip = document.createElement('div'); tip.className = 'ai-tip'; el.append(tip);
+    g.append('rect').attr('width', W).attr('height', bh + gap).attr('fill', 'transparent')
+      .on('mousemove', function (ev, d) {
+        bars.attr('opacity', b => b === d ? 1 : 0.45);
+        const k = document.createElement('div'); k.className = 'k'; k.textContent = o.label(d);
+        const v = document.createElement('div'); v.textContent = o.tip ? o.tip(d) : o.fmt(o.value(d));
+        tip.replaceChildren(k, v); tip.style.opacity = 1;
+        const [mx, my] = d3.pointer(ev, el);
+        tip.style.left = Math.max(0, Math.min(mx + 12, el.clientWidth - tip.offsetWidth)) + 'px';
+        tip.style.top = (my + 14) + 'px';
+      })
+      .on('mouseleave', () => { bars.attr('opacity', 1); tip.style.opacity = 0; });
+  }
+
+  const sortState = {};
+  function table(id, src, fmt, search) {
+    const tbl = document.getElementById(id), body = tbl.querySelector('tbody');
+    const d = dash.data(src);
+    body.replaceChildren();
+    if (d.status !== 'ok') return;
+    const cols = [...tbl.querySelectorAll('th')].map(th => th.dataset.field);
+    const st = sortState[id] || (sortState[id] = {k: cols[2], dir: -1});
+    tbl.querySelectorAll('th').forEach(th => th.setAttribute('aria-sort', th.dataset.field === st.k ? (st.dir > 0 ? 'ascending' : 'descending') : 'none'));
+    const q = search ? search.value.trim().toLowerCase() : '';
+    const rows = d.data.filter(r => !q || cols.some(c => String(r[c] ?? '').toLowerCase().includes(q)))
+      .slice().sort((a, b) => {
+        const x = a[st.k], y = b[st.k];
+        if (x == null) return 1; if (y == null) return -1;
+        return (typeof x === 'number' ? x - y : String(x).localeCompare(String(y))) * st.dir;
+      });
+    rows.forEach(r => {
+      const tr = document.createElement('tr');
+      tbl.querySelectorAll('th').forEach(th => {
+        const td = document.createElement('td'); const c = th.dataset.field;
+        td.className = th.className; td.textContent = r[c] == null ? '—' : (fmt[c] ? fmt[c](r[c]) : r[c]);
+        tr.append(td);
+      });
+      body.append(tr);
+    });
+  }
+  ['tbl-models', 'tbl-co'].forEach(id => {
+    document.getElementById(id).querySelectorAll('th').forEach(th => th.querySelector('button').addEventListener('click', () => {
+      const st = sortState[id] || (sortState[id] = {});
+      st.dir = st.k === th.dataset.field ? -st.dir : (th.classList.contains('n') ? -1 : 1);
+      st.k = th.dataset.field; draw();
+    }));
+  });
+  const qModels = document.getElementById('q-models');
+  qModels.addEventListener('input', () => draw());
+
+  const f1 = d3.format(',.1f'), f0 = d3.format(',.0f');
+  const price = v => '$' + (v < 1 ? d3.format('.3~f')(v) : d3.format('.2f')(v));
+
+  function draw() {
+    fillMarks();
+    const m = dash.data('models').data || [], a = dash.data('arena').data || [];
+    const c = dash.data('companies').data || [], s = dash.data('share').data || [];
+
+    let el = document.getElementById('ch-intel');
+    if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => q.intelligence - p.intelligence).slice(0, 8),
+      {label: r => r.model, value: r => r.intelligence, fmt: f1, tip: r => `${r.lab} · Index ${f1(r.intelligence)}`});
+    el = document.getElementById('ch-arena');
+    if (guard(el, 'arena')) hbar(el, a.slice().sort((p, q) => q.score - p.score),
+      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), tip: r => `${r.model} · ${f0(r.score)} (plads ${r.rank})`});
+    el = document.getElementById('ch-speed');
+    if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => q.speed - p.speed).slice(0, 8),
+      {label: r => r.model, value: r => r.speed, fmt: f0, color: () => dash.colors[1], tip: r => `${r.lab} · ${f0(r.speed)} tokens/sek.`});
+    el = document.getElementById('ch-price');
+    if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => p.price_in - q.price_in).slice(0, 8),
+      {label: r => r.model, value: r => r.price_in, fmt: price, color: () => dash.colors[2], tip: r => `${r.lab} · ${price(r.price_in)} pr. 1M input`});
+    table('tbl-models', 'models', {intelligence: f1, speed: f0, price_in: price}, qModels);
+
+    document.getElementById('lg-priv').style.background = dash.colors[0];
+    el = document.getElementById('ch-value');
+    if (guard(el, 'companies')) hbar(el, c.slice().sort((p, q) => q.value_bn - p.value_bn),
+      {label: r => r.company, value: r => r.value_bn, fmt: f0, color: r => r.type === 'Børsnoteret' ? 'var(--cds-chart-muted)' : dash.colors[0],
+       tip: r => `$${f0(r.value_bn)} mia. · pr. ${r.value_asof}`});
+    el = document.getElementById('ch-growth');
+    if (guard(el, 'companies')) hbar(el, c.filter(r => r.growth_pct != null).sort((p, q) => q.growth_pct - p.growth_pct),
+      {label: r => r.company, value: r => r.growth_pct, fmt: v => f1(v).replace(/\.0$/, '') + '%', color: () => dash.colors[3], tip: r => `${r.growth_period}`});
+
+    el = document.getElementById('ch-share');
+    if (guard(el, 'share')) {
+      el.replaceChildren();
+      d3.groups(s, r => r.measure).forEach(([measure, rows]) => {
+        const h = document.createElement('div'); h.className = 'ai-subh'; h.textContent = measure;
+        const box = document.createElement('div'); box.style.position = 'relative';
+        el.append(h, box);
+        const sorted = rows.slice().sort((p, q) => q.share_pct - p.share_pct);
+        hbar(box, sorted,
+          {label: r => r.company, value: r => r.share_pct, fmt: v => f1(v).replace(/\.0$/, '') + '%', color: r => r === sorted[0] ? dash.colors[0] : 'var(--cds-chart-muted)'});
+      });
+    }
+    table('tbl-co', 'companies', {value_bn: f0, growth_pct: v => f1(v).replace(/\.0$/, ''), run_rate_bn: f0});
+  }
+  dash.onData(draw);
+})();
+</script>
+
+</div></body></html>
