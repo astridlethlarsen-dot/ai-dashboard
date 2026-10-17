@@ -3,7 +3,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Source+Serif+4:wght@400&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <style>
-:root{--font-anthropic-sans:Inter,system-ui,sans-serif;--font-anthropic-serif:"Source Serif 4",Georgia,serif;
+:root{--cds-chart-axis:#d8d4c9;--font-anthropic-sans:Inter,system-ui,sans-serif;--font-anthropic-serif:"Source Serif 4",Georgia,serif;
 --color-fg:#1f1e1d;--color-fg-muted:#6b6a68;--color-bg:#faf9f5;--color-panel:#ffffff;--color-border-line:#e6e3da;--color-bad:#c4453c;
 --cds-text-secondary:#6b6a68;--cds-surface-popover:#ffffff;--cds-border:#e6e3da;--cds-shadow-popover:0 4px 16px rgba(0,0,0,.08);
 --cds-chart-muted:#c9c6bd;--cds-radius:10px;--cds-pad-xs:4px;--cds-pad-sm:8px;--cds-pad-md:12px;--cds-pad-lg:20px;
@@ -16,7 +16,7 @@ body{margin:0;background:var(--color-bg)}
 .wrap{max-width:1200px;margin-inline:auto;padding:clamp(16px,4vw,40px)}
 </style>
 <script>
-window.DATA={"models": [{"model": "Claude Opus 5.5", "lab": "Anthropic", "intelligence": 57.6, "speed": 178, "price_in": 4.0}, {"model": "Claude Sonnet 5.5", "lab": "Anthropic", "intelligence": 56.0, "speed": 117, "price_in": 2.0}, {"model": "Claude Fable 5.1", "lab": "Anthropic", "intelligence": 53.4, "speed": 63, "price_in": 10.0}, {"model": "GPT-6 Astra", "lab": "OpenAI", "intelligence": 52.7, "speed": 185, "price_in": 10.0}, {"model": "Gemini 4 Argon", "lab": "Google", "intelligence": 52.6, "speed": 62, "price_in": 2.0}, {"model": "Muse Wonder", "lab": "Meta", "intelligence": 52.4, "speed": 80, "price_in": 4.0}, {"model": "GPT-6.1 Sol", "lab": "OpenAI", "intelligence": 51.8, "speed": 64, "price_in": 2.0}, {"model": "Muse Spark 1.3", "lab": "Meta", "intelligence": 48.1, "speed": 91, "price_in": 1.25}, {"model": "GPT-5.6 Sol", "lab": "OpenAI", "intelligence": 47.0, "speed": 122, "price_in": 4.0}, {"model": "Grok 4.7", "lab": "xAI (SpaceX)", "intelligence": 46.4, "speed": 69, "price_in": 2.0}, {"model": "MiMo-V2.6-Pro", "lab": "Xiaomi", "intelligence": 46.3, "speed": 32, "price_in": 0.435}, {"model": "Qwen3.8-Max", "lab": "Alibaba", "intelligence": 45.4, "speed": 38, "price_in": 2.0}, {"model": "GLM-5.3", "lab": "Z.ai", "intelligence": 44.8, "speed": 187, "price_in": 0.079}, {"model": "Kimi K3", "lab": "Moonshot", "intelligence": 43.6, "speed": 107, "price_in": 0.304}, {"model": "Claude Haiku 5.5", "lab": "Anthropic", "intelligence": 43.4, "speed": 168, "price_in": 0.1}, {"model": "Gemini 3.8 Flash", "lab": "Google", "intelligence": 40.9, "speed": 109, "price_in": 0.825}, {"model": "DeepSeek V4.1 Flash", "lab": "DeepSeek", "intelligence": 39.5, "speed": 276, "price_in": 0.15}, {"model": "GPT-6 Luna", "lab": "OpenAI", "intelligence": 38.1, "speed": 110, "price_in": 0.1}], "arena": [{"lab": "Google", "model": "Gemini 4 Argon (High)", "rank": 1, "score": 1524, "votes": 4904}, {"lab": "Meta", "model": "Muse Wonder (Max)", "rank": 2, "score": 1509, "votes": 3247}, {"lab": "Anthropic", "model": "Claude Opus 5.5 (High)", "rank": 3, "score": 1508, "votes": 8300}, {"lab": "Moonshot", "model": "Kimi K3 (Max)", "rank": 18, "score": 1487, "votes": 32795}, {"lab": "OpenAI", "model": "GPT-5.6 Sol (xHigh)", "rank": 21, "score": 1485, "votes": 40442}, {"lab": "Alibaba", "model": "Qwen3.8-Max", "rank": 24, "score": 1482, "votes": 27766}, {"lab": "Xiaomi", "model": "MiMo-V2.6-Pro", "rank": 27, "score": 1479, "votes": 4075}, {"lab": "Z.ai", "model": "GLM-5.3 (Max)", "rank": 28, "score": 1479, "votes": 22543}, {"lab": "xAI (SpaceX)", "model": "Grok 4.20 Beta 1", "rank": 37, "score": 1475, "votes": 27908}, {"lab": "DeepSeek", "model": "DeepSeek-V4.1-Flash (Max)", "rank": 38, "score": 1475, "votes": 12793}], "companies": [{"company": "Nvidia", "type": "Børsnoteret", "value_bn": 5650, "value_asof": "2026-10-05", "growth_pct": 106, "growth_period": "Q2 FY27 (maj–jul 2026)", "run_rate_bn": null}, {"company": "Alphabet", "type": "Børsnoteret", "value_bn": 4160, "value_asof": "2026-10-05", "growth_pct": 24, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Microsoft", "type": "Børsnoteret", "value_bn": 3840, "value_asof": "2026-10-05", "growth_pct": 18, "growth_period": "Q1 2026 (jan–mar)", "run_rate_bn": null}, {"company": "Amazon", "type": "Børsnoteret", "value_bn": 2710, "value_asof": "2026-10-05", "growth_pct": 19.6, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Meta", "type": "Børsnoteret", "value_bn": 1900, "value_asof": "2026-10-05", "growth_pct": 28, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Anthropic", "type": "Privat", "value_bn": 965, "value_asof": "2026-05-28", "growth_pct": null, "growth_period": null, "run_rate_bn": 65}, {"company": "OpenAI", "type": "Privat", "value_bn": 852, "value_asof": "2026-03-31", "growth_pct": null, "growth_period": null, "run_rate_bn": 50}, {"company": "xAI (SpaceX)", "type": "Del af SpaceX", "value_bn": 250, "value_asof": "2026-02-02", "growth_pct": null, "growth_period": null, "run_rate_bn": null}], "share": [{"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Anthropic", "share_pct": 31.4}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "OpenAI", "share_pct": 29.0}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Google", "share_pct": 12.1}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Microsoft", "share_pct": 7.2}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "Anthropic", "share_pct": 40}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "OpenAI", "share_pct": 27}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "Google", "share_pct": 21}, {"measure": "Andel af virksomheder der betaler (Ramp AI Index, aug 2026)", "company": "Anthropic", "share_pct": 43.8}, {"measure": "Andel af virksomheder der betaler (Ramp AI Index, aug 2026)", "company": "OpenAI", "share_pct": 39.8}]};
+window.DATA={"models": [{"model": "Claude Opus 5.5", "lab": "Anthropic", "intelligence": 57.6, "speed": 178, "price_in": 4.0}, {"model": "Claude Sonnet 5.5", "lab": "Anthropic", "intelligence": 56.0, "speed": 117, "price_in": 2.0}, {"model": "Claude Fable 5.1", "lab": "Anthropic", "intelligence": 53.4, "speed": 63, "price_in": 10.0}, {"model": "GPT-6 Astra", "lab": "OpenAI", "intelligence": 52.7, "speed": 185, "price_in": 10.0}, {"model": "Gemini 4 Argon", "lab": "Google", "intelligence": 52.6, "speed": 62, "price_in": 2.0}, {"model": "Muse Wonder", "lab": "Meta", "intelligence": 52.4, "speed": 80, "price_in": 4.0}, {"model": "GPT-6.1 Sol", "lab": "OpenAI", "intelligence": 51.8, "speed": 64, "price_in": 2.0}, {"model": "Muse Spark 1.3", "lab": "Meta", "intelligence": 48.1, "speed": 91, "price_in": 1.25}, {"model": "GPT-5.6 Sol", "lab": "OpenAI", "intelligence": 47.0, "speed": 122, "price_in": 4.0}, {"model": "Grok 4.7", "lab": "xAI (SpaceX)", "intelligence": 46.4, "speed": 69, "price_in": 2.0}, {"model": "MiMo-V2.6-Pro", "lab": "Xiaomi", "intelligence": 46.3, "speed": 32, "price_in": 0.435}, {"model": "Qwen3.8-Max", "lab": "Alibaba", "intelligence": 45.4, "speed": 38, "price_in": 2.0}, {"model": "GLM-5.3", "lab": "Z.ai", "intelligence": 44.8, "speed": 187, "price_in": 0.079}, {"model": "Kimi K3", "lab": "Moonshot", "intelligence": 43.6, "speed": 107, "price_in": 0.304}, {"model": "Claude Haiku 5.5", "lab": "Anthropic", "intelligence": 43.4, "speed": 168, "price_in": 0.1}, {"model": "Gemini 3.8 Flash", "lab": "Google", "intelligence": 40.9, "speed": 109, "price_in": 0.825}, {"model": "DeepSeek V4.1 Flash", "lab": "DeepSeek", "intelligence": 39.5, "speed": 276, "price_in": 0.15}, {"model": "GPT-6 Luna", "lab": "OpenAI", "intelligence": 38.1, "speed": 110, "price_in": 0.1}], "arena": [{"lab": "Google", "model": "Gemini 4 Argon (High)", "rank": 1, "score": 1524, "votes": 4904}, {"lab": "Meta", "model": "Muse Wonder (Max)", "rank": 2, "score": 1509, "votes": 3247}, {"lab": "Anthropic", "model": "Claude Opus 5.5 (High)", "rank": 3, "score": 1508, "votes": 8300}, {"lab": "Moonshot", "model": "Kimi K3 (Max)", "rank": 18, "score": 1487, "votes": 32795}, {"lab": "OpenAI", "model": "GPT-5.6 Sol (xHigh)", "rank": 21, "score": 1485, "votes": 40442}, {"lab": "Alibaba", "model": "Qwen3.8-Max", "rank": 24, "score": 1482, "votes": 27766}, {"lab": "Xiaomi", "model": "MiMo-V2.6-Pro", "rank": 27, "score": 1479, "votes": 4075}, {"lab": "Z.ai", "model": "GLM-5.3 (Max)", "rank": 28, "score": 1479, "votes": 22543}, {"lab": "xAI (SpaceX)", "model": "Grok 4.20 Beta 1", "rank": 37, "score": 1475, "votes": 27908}, {"lab": "DeepSeek", "model": "DeepSeek-V4.1-Flash (Max)", "rank": 38, "score": 1475, "votes": 12793}], "companies": [{"company": "Nvidia", "type": "Børsnoteret", "value_bn": 5650, "value_asof": "2026-10-05", "growth_pct": 106, "growth_period": "Q2 FY27 (maj–jul 2026)", "run_rate_bn": null}, {"company": "Alphabet", "type": "Børsnoteret", "value_bn": 4160, "value_asof": "2026-10-05", "growth_pct": 24, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Microsoft", "type": "Børsnoteret", "value_bn": 3840, "value_asof": "2026-10-05", "growth_pct": 18, "growth_period": "Q1 2026 (jan–mar)", "run_rate_bn": null}, {"company": "Amazon", "type": "Børsnoteret", "value_bn": 2710, "value_asof": "2026-10-05", "growth_pct": 19.6, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Meta", "type": "Børsnoteret", "value_bn": 1900, "value_asof": "2026-10-05", "growth_pct": 28, "growth_period": "Q2 2026", "run_rate_bn": null}, {"company": "Anthropic", "type": "Privat", "value_bn": 965, "value_asof": "2026-05-28", "growth_pct": null, "growth_period": null, "run_rate_bn": 65}, {"company": "OpenAI", "type": "Privat", "value_bn": 852, "value_asof": "2026-03-31", "growth_pct": null, "growth_period": null, "run_rate_bn": 50}, {"company": "xAI (SpaceX)", "type": "Del af SpaceX", "value_bn": 250, "value_asof": "2026-02-02", "growth_pct": null, "growth_period": null, "run_rate_bn": null}], "share": [{"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Anthropic", "share_pct": 31.4}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "OpenAI", "share_pct": 29.0}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Google", "share_pct": 12.1}, {"measure": "Omsætningsandel (Counterpoint, Q1 2026)", "company": "Microsoft", "share_pct": 7.2}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "Anthropic", "share_pct": 40}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "OpenAI", "share_pct": 27}, {"measure": "Virksomheders API-forbrug (Menlo Ventures, dec 2025)", "company": "Google", "share_pct": 21}, {"measure": "Andel af virksomheder der betaler (Ramp AI Index, aug 2026)", "company": "Anthropic", "share_pct": 43.8}, {"measure": "Andel af virksomheder der betaler (Ramp AI Index, aug 2026)", "company": "OpenAI", "share_pct": 39.8}], "status": [{"key": "data", "updated": "17. oktober 2026"}]};
 window.dash=(function(){const calcs={},fns=[];
  return{colors:['var(--c0)','var(--c1)','var(--c2)','var(--c3)'],
  data(id){if(calcs[id]){const c=calcs[id];return{status:'ok',data:c.fn(...c.inputs.map(i=>this.data(i).data))}}return{status:DATA[id]?'ok':'missing',data:DATA[id]||[]}},
@@ -24,7 +24,17 @@ window.dash=(function(){const calcs={},fns=[];
  onData(fn){fns.push(fn);fn();let t;addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(fn,100)})}}})();
 </script></head><body><div class="wrap">
 <style>
-.ai{font-family:var(--font-anthropic-sans);color:var(--color-fg)}
+.ai{font-family:var(--font-anthropic-sans);color:var(--color-fg);--ai-c1:#4263eb;--ai-c2:#7950f2;--ai-c3:#1c7ed6;--ai-c4:#ae3ec9;--ai-muted:#91a7ff}
+.ai-hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,16rem),1fr));gap:var(--cds-gap-md);margin:var(--cds-gap-md) 0 var(--cds-gap-xs)}
+.ai-hero button{all:unset;box-sizing:border-box;cursor:pointer;background:var(--color-panel);border:1px solid var(--color-border-line);border-left:4px solid var(--ai-c1);border-radius:var(--cds-radius);padding:var(--cds-pad-lg);display:block;min-width:0}
+.ai-hero button.v{border-left-color:var(--ai-c2)}
+.ai-hero button:hover,.ai-hero button:focus-visible{border-color:var(--ai-c1);outline:none}
+.ai-hero button.v:hover,.ai-hero button.v:focus-visible{border-color:var(--ai-c2)}
+.ai-hero .lbl{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.ai-hero .name{font-family:var(--font-anthropic-serif);font-size:var(--cds-font-size-title);font-weight:400;margin:var(--cds-gap-xs) 0;line-height:1.15}
+.ai-hero .meta{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.ai-hero .go{font-size:var(--cds-font-size-caption);color:var(--ai-c1);margin-top:var(--cds-gap-sm)}
+.ai-hero button.v .go{color:var(--ai-c2)}
 .ai-head h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:var(--cds-font-size-title);margin:0}
 .ai-sub{color:var(--color-fg-muted);margin:var(--cds-gap-xs) 0 var(--cds-gap-lg);font-size:var(--cds-font-size-body)}
 .ai-sub b{font-weight:var(--cds-font-weight-medium);color:var(--color-fg)}
@@ -67,7 +77,21 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
 <div class="ai">
   <header class="ai-head">
     <h1 id="top">AI dashboard</h1>
-    <p class="ai-sub">Mest intelligente model lige nu: <b data-source="leaders" data-field="model" data-where="metric=intelligence">—</b>. Mest værdifulde virksomhed: <b data-source="coLeaders" data-field="company" data-where="metric=value">—</b>. Opdateres hver 14. dag.</p>
+    <div class="ai-hero">
+      <button id="hero-model" type="button">
+        <div class="lbl">Mest intelligente model lige nu</div>
+        <div class="name" data-source="leaders" data-field="model" data-where="metric=intelligence">—</div>
+        <div class="meta"><span data-source="leaders" data-field="lab" data-where="metric=intelligence">—</span> · Intelligence Index <span data-source="leaders" data-field="value" data-where="metric=intelligence">—</span></div>
+        <div class="go">Se leaderboardet →</div>
+      </button>
+      <button id="hero-co" class="v" type="button">
+        <div class="lbl">Mest værdifulde virksomhed</div>
+        <div class="name" data-source="coLeaders" data-field="company" data-where="metric=value">—</div>
+        <div class="meta">Markedsværdi $<span data-source="coLeaders" data-field="value" data-where="metric=value">—</span> mia.</div>
+        <div class="go">Se leaderboardet →</div>
+      </button>
+    </div>
+    <p class="ai-sub">Opdateres hver 14. dag. Senest opdateret <span data-source="status" data-field="updated" data-where="key=data">—</span>.</p>
   </header>
 
   <nav class="ai-tabs" role="tablist">
@@ -81,7 +105,7 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
         <div class="big"><span data-source="leaders" data-field="value" data-where="metric=intelligence">—</span></div>
         <div class="who" data-source="leaders" data-field="model" data-where="metric=intelligence">—</div>
         <div class="lab" data-source="leaders" data-field="lab" data-where="metric=intelligence">—</div></div>
-      <div class="ai-card ai-tile"><div class="lbl">Højeste Arena-score (menneskers stemmer)</div>
+      <div class="ai-card ai-tile"><div class="lbl">Brugernes favorit (stemmer på Arena)</div>
         <div class="big"><span data-source="leaders" data-field="value" data-where="metric=arena">—</span></div>
         <div class="who" data-source="leaders" data-field="model" data-where="metric=arena">—</div>
         <div class="lab" data-source="leaders" data-field="lab" data-where="metric=arena">—</div></div>
@@ -96,13 +120,13 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
     </div>
 
     <div class="ai-grid">
-      <div class="ai-card"><h2 id="c-intel">Intelligence Index</h2><p class="ai-note">Samlet score på 10 uafhængige tests. Højere er bedre. Top 8.</p>
+      <div class="ai-card"><h2 id="c-intel">Intelligence Index</h2><p class="ai-note">Baseret på data fra Artificial Analysis (via modelgrep) og Arena (arena.ai). Opdateret <span data-source="status" data-field="updated" data-where="key=data">—</span>.</p>
         <div class="ai-chart" id="ch-intel" data-source="models"></div></div>
-      <div class="ai-card"><h2 id="c-arena">Arena-score, bedste model pr. lab</h2><p class="ai-note">Blinde stemmer fra brugere (Elo). Højere er bedre. Søjlerne starter ved 1.400.</p>
+      <div class="ai-card"><h2 id="c-arena">Brugernes favoritter: bedste model pr. lab</h2><p class="ai-note">Brugere sammenligner to anonyme svar og stemmer på det bedste. Jo højere score, jo oftere vinder labbets bedste model.</p>
         <div class="ai-chart" id="ch-arena" data-source="arena"></div></div>
-      <div class="ai-card"><h2 id="c-speed">Hastighed</h2><p class="ai-note">Output-tokens pr. sekund. Højere er bedre. Top 8.</p>
+      <div class="ai-card"><h2 id="c-speed">Hastighed</h2><p class="ai-note">Output-tokens pr. sekund.</p>
         <div class="ai-chart" id="ch-speed" data-source="models"></div></div>
-      <div class="ai-card"><h2 id="c-price">Pris</h2><p class="ai-note">USD pr. 1M input-tokens. Lavere er bedre. Billigste 8.</p>
+      <div class="ai-card"><h2 id="c-price">Pris</h2><p class="ai-note">USD pr. 1M input-tokens.</p>
         <div class="ai-chart" id="ch-price" data-source="models"></div></div>
     </div>
 
@@ -141,7 +165,7 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
 
     <div class="ai-grid">
       <div class="ai-card"><h2 id="c-value">Markedsværdi</h2><p class="ai-note">Mia. USD. Private: seneste finansieringsrunde.</p>
-        <div class="ai-legend"><span><i style="background:var(--cds-chart-muted)" id="lg-pub"></i>Børsnoteret</span><span><i id="lg-priv"></i>Privat / opkøbt</span></div>
+        <div class="ai-legend"><span><i style="background:var(--ai-muted)" id="lg-pub"></i>Børsnoteret</span><span><i style="background:var(--ai-c2)" id="lg-priv"></i>Privat / opkøbt</span></div>
         <div class="ai-chart" id="ch-value" data-source="companies"></div></div>
       <div class="ai-card"><h2 id="c-growth">Omsætningsvækst</h2><p class="ai-note">Seneste rapporterede kvartal, år-over-år.</p>
         <div class="ai-chart" id="ch-growth" data-source="companies"></div></div>
@@ -171,7 +195,7 @@ table.ai-t{width:100%;border-collapse:collapse;font-size:var(--cds-font-size-bod
     </div>
   </section>
 
-  <p class="ai-about" id="om">Modeldata: Artificial Analysis (via modelgrep) og Arena (arena.ai). Virksomhedsdata: kvartalsregnskaber, rapporterede finansieringsrunder, Counterpoint, Menlo Ventures og Ramp. Data opdateret 17. oktober 2026. Jeg (Claude) er lavet af Anthropic, så tallene kommer kun fra eksterne kilder.</p>
+  <p class="ai-about" id="om">Modeldata: Artificial Analysis (via modelgrep) og Arena (arena.ai). Virksomhedsdata: kvartalsregnskaber, rapporterede finansieringsrunder, Counterpoint, Menlo Ventures og Ramp. Jeg (Claude) er lavet af Anthropic, så tallene kommer kun fra eksterne kilder.</p>
 </div>
 
 <script>
@@ -224,6 +248,9 @@ dash.calc('coLeaders', {
   };
   tabs.forEach(t => t.addEventListener('click', () => show(t.dataset.tab)));
   if (location.hash.slice(1) === 'virksomheder') show('virksomheder');
+  const goTo = (tab, id) => { show(tab); requestAnimationFrame(() => { const el = document.getElementById(id); el.scrollIntoView({behavior: 'smooth', block: 'start'}); dash.setLink(id); }); };
+  document.getElementById('hero-model').addEventListener('click', () => goTo('modeller', 'c-intel'));
+  document.getElementById('hero-co').addEventListener('click', () => goTo('virksomheder', 'c-value'));
 
   // Fill single-value marks
   function fillMarks() {
@@ -250,7 +277,7 @@ dash.calc('coLeaders', {
   function hbar(el, rows, o) {
     el.replaceChildren();
     if (!rows.length) return;
-    const W = el.clientWidth || 320, bh = 24, gap = 6, H = rows.length * (bh + gap);
+    const W = el.clientWidth || 320, bh = 24, gap = 6, AX = o.axis ? 20 : 0, H = rows.length * (bh + gap) + AX;
     const svg = d3.select(el).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block').style('overflow', 'visible');
     const probe = svg.append('text').attr('font-size', 12);
     let lw = 0, vw = 0;
@@ -262,9 +289,16 @@ dash.calc('coLeaders', {
     const g = svg.selectAll('g.r').data(rows).join('g').attr('class', 'r').attr('transform', (d, i) => `translate(0,${i * (bh + gap)})`);
     g.append('text').attr('x', lw).attr('y', bh / 2).attr('dy', '0.35em').attr('text-anchor', 'end').attr('font-size', 12).attr('fill', 'var(--color-fg)').text(o.label);
     const bars = g.append('rect').attr('x', lw + 8).attr('y', 4).attr('height', bh - 8).attr('rx', 4)
-      .attr('width', d => Math.max(2, x(o.value(d)))).attr('fill', d => o.color ? o.color(d) : dash.colors[0]);
+      .attr('width', d => Math.max(2, x(o.value(d)))).attr('fill', d => o.color ? o.color(d) : 'var(--ai-c1)');
     g.append('text').attr('x', d => lw + 14 + x(o.value(d))).attr('y', bh / 2).attr('dy', '0.35em').attr('font-size', 12)
       .attr('fill', 'var(--color-fg-muted)').style('font-variant-numeric', 'tabular-nums').text(d => o.fmt(o.value(d)));
+    if (o.axis) {
+      const ax = svg.append('g').attr('transform', `translate(${lw + 8},${rows.length * (bh + gap) + 2})`);
+      ax.append('line').attr('x2', x.range()[1]).attr('stroke', 'var(--cds-chart-axis)');
+      x.ticks(Math.max(2, Math.floor(x.range()[1] / 70))).forEach(t => {
+        ax.append('text').attr('x', x(t)).attr('y', 14).attr('text-anchor', 'middle').attr('font-size', 11).attr('fill', 'var(--color-fg-muted)').text(o.axis(t));
+      });
+    }
     const tip = document.createElement('div'); tip.className = 'ai-tip'; el.append(tip);
     g.append('rect').attr('width', W).attr('height', bh + gap).attr('fill', 'transparent')
       .on('mousemove', function (ev, d) {
@@ -325,26 +359,26 @@ dash.calc('coLeaders', {
 
     let el = document.getElementById('ch-intel');
     if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => q.intelligence - p.intelligence).slice(0, 8),
-      {label: r => r.model, value: r => r.intelligence, fmt: f1, tip: r => `${r.lab} · Index ${f1(r.intelligence)}`});
+      {label: r => r.model, value: r => r.intelligence, fmt: f1, color: () => 'var(--ai-c1)', tip: r => `${r.lab} · Index ${f1(r.intelligence)}`});
     el = document.getElementById('ch-arena');
     if (guard(el, 'arena')) hbar(el, a.slice().sort((p, q) => q.score - p.score),
-      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), tip: r => `${r.model} · ${f0(r.score)} (plads ${r.rank})`});
+      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-c2)', axis: v => f0(v + 1400), tip: r => `${r.model} · ${f0(r.score)} (plads ${r.rank})`});
     el = document.getElementById('ch-speed');
     if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => q.speed - p.speed).slice(0, 8),
-      {label: r => r.model, value: r => r.speed, fmt: f0, color: () => dash.colors[1], tip: r => `${r.lab} · ${f0(r.speed)} tokens/sek.`});
+      {label: r => r.model, value: r => r.speed, fmt: f0, color: () => 'var(--ai-c3)', tip: r => `${r.lab} · ${f0(r.speed)} tokens/sek.`});
     el = document.getElementById('ch-price');
     if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => p.price_in - q.price_in).slice(0, 8),
-      {label: r => r.model, value: r => r.price_in, fmt: price, color: () => dash.colors[2], tip: r => `${r.lab} · ${price(r.price_in)} pr. 1M input`});
+      {label: r => r.model, value: r => r.price_in, fmt: price, color: () => 'var(--ai-c4)', tip: r => `${r.lab} · ${price(r.price_in)} pr. 1M input`});
     table('tbl-models', 'models', {intelligence: f1, speed: f0, price_in: price}, qModels);
 
-    document.getElementById('lg-priv').style.background = dash.colors[0];
+    
     el = document.getElementById('ch-value');
     if (guard(el, 'companies')) hbar(el, c.slice().sort((p, q) => q.value_bn - p.value_bn),
-      {label: r => r.company, value: r => r.value_bn, fmt: f0, color: r => r.type === 'Børsnoteret' ? 'var(--cds-chart-muted)' : dash.colors[0],
+      {label: r => r.company, value: r => r.value_bn, fmt: f0, color: r => r.type === 'Børsnoteret' ? 'var(--ai-muted)' : 'var(--ai-c2)',
        tip: r => `$${f0(r.value_bn)} mia. · pr. ${r.value_asof}`});
     el = document.getElementById('ch-growth');
     if (guard(el, 'companies')) hbar(el, c.filter(r => r.growth_pct != null).sort((p, q) => q.growth_pct - p.growth_pct),
-      {label: r => r.company, value: r => r.growth_pct, fmt: v => f1(v).replace(/\.0$/, '') + '%', color: () => dash.colors[3], tip: r => `${r.growth_period}`});
+      {label: r => r.company, value: r => r.growth_pct, fmt: v => f1(v).replace(/\.0$/, '') + '%', color: () => 'var(--ai-c3)', tip: r => `${r.growth_period}`});
 
     el = document.getElementById('ch-share');
     if (guard(el, 'share')) {
@@ -355,7 +389,7 @@ dash.calc('coLeaders', {
         el.append(h, box);
         const sorted = rows.slice().sort((p, q) => q.share_pct - p.share_pct);
         hbar(box, sorted,
-          {label: r => r.company, value: r => r.share_pct, fmt: v => f1(v).replace(/\.0$/, '') + '%', color: r => r === sorted[0] ? dash.colors[0] : 'var(--cds-chart-muted)'});
+          {label: r => r.company, value: r => r.share_pct, fmt: v => f1(v).replace(/\.0$/, '') + '%', color: r => r === sorted[0] ? 'var(--ai-c1)' : 'var(--ai-muted)'});
       });
     }
     table('tbl-co', 'companies', {value_bn: f0, growth_pct: v => f1(v).replace(/\.0$/, ''), run_rate_bn: f0});
