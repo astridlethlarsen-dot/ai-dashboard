@@ -364,7 +364,7 @@ dash.calc('coLeaders', {
       {label: r => r.model, value: r => r.intelligence, fmt: f1, color: () => 'var(--ai-c1)', tip: r => `${r.lab} · Index ${f1(r.intelligence)}`});
     el = document.getElementById('ch-arena');
     if (guard(el, 'arena')) hbar(el, a.slice().sort((p, q) => q.score - p.score),
-      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-lteal)', axis: v => f0(v + 1400), axisTitle: 'Point fra brugernes stemmer: jo flere point, jo mere populær', tip: r => `${r.model.replace(/\s*\([^)]*\)$/, '')} · ${f0(r.score)} (plads ${r.rank})`});
+      {label: r => r.lab, value: r => r.score - 1400, fmt: v => f0(v + 1400), color: () => 'var(--ai-lteal)', axis: v => f0(v + 1400), axisTitle: 'Arena-score', tip: r => `${r.model.replace(/\s*\([^)]*\)$/, '')} · ${f0(r.score)} (plads ${r.rank})`});
     el = document.getElementById('ch-speed');
     if (guard(el, 'models')) hbar(el, m.slice().sort((p, q) => q.speed - p.speed).slice(0, 8),
       {label: r => r.model, value: r => r.speed, fmt: f0, color: () => 'var(--ai-c3)', tip: r => `${r.lab} · ${f0(r.speed)} tokens/sek.`});
